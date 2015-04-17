@@ -1,0 +1,98 @@
+.one_five .background_grey table a {
+    text-decoration: none;
+}
+.one_five .background_grey table:hover a {
+    text-decoration: underline;
+    font-weight: bold;
+}
+[for="wp_welcome_panel-hide"] { 
+    display: none;
+}
+.welcome-panel {
+    overflow: hidden !important;
+    font-size: 13px;
+}
+div.welcome-panel-content {
+    display: none !important;
+}
+.welcome-panel-close {
+    display: none !important;
+}
+#main_content {
+    margin: 0px 0px 0px 10px;
+}
+.td_width {
+    width:80px;
+}
+.donutchart {
+    height:260px;
+    margin-top:-15px;
+    margin-bottom:-20px
+}
+.row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.background_grey {
+    background: #f7f7f7;
+    border: 1px solid rgba(0,0,0,.06);
+}
+.one_five .background_grey table {
+    width: 100%;
+	padding-left: 5px;
+}
+.one_five .background_grey table:hover {
+    background: #f3f3f3;
+}
+.line_break {
+    border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.one_five {
+    float: left;
+    margin: 0 20px 20px 0;
+    position: relative;
+    width: 18%;
+}
+.two_five {
+    float: left;
+    margin: 0;
+    position: relative;
+    width: 38%;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1300px) {
+    .row {
+        width: 100%;
+    }
+    .one_five {
+        width: 18%;
+    }
+    .welcome-panel {
+        font-size: 10px;
+    }
+    .td_width {
+        width:60px;
+    }
+    #td_thick {
+        display: none;
+    }            
+}
+
+@media screen and (min-width: 200px) and (max-width: 1024px) {
+    .row {
+        width: 100%;
+    }
+    .one_five {
+        width: 16%;
+    }
+    .welcome-panel {
+        width: 0px;
+        height: 0px;
+        display: none;
+    }
+    #td_thick {
+        display: none;
+    }  
+}
