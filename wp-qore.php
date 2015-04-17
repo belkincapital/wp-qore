@@ -3,7 +3,7 @@
    Plugin Name: WP Qore
    Plugin URI: http://wpqore.com/
    Description: For WordPress Standalone and Multisite.
-   Version: 2.3
+   Version: 2.4
    Author: Jason Jersey
    Author URI: http://twitter.com/degersey
    License: GNU GPL 3.0
@@ -160,3 +160,22 @@ function show_welcome_panel_on_multisite() {
 	if ( 0 == get_user_meta( $user_id, 'show_welcome_panel', true ) )
 		update_user_meta( $user_id, 'show_welcome_panel', 1 );
 }
+
+/**
+ * Add Login Confirm
+ */
+function psmu_login_confirm_notice() { ?>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+jQuery(document).ready( function($) {
+
+    $('#loginform p.submit input').click(function() {
+        return confirm('You are about to login. Do you wish to continue?');
+    });
+	  
+});
+</script>
+<?php
+
+}
+add_action('login_head', 'psmu_login_confirm_notice');
