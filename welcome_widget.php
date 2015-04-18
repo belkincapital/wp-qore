@@ -221,14 +221,6 @@ function drawChart() {
 <div id="main_content">
 <section>
 
-<?php if ( get_option( 'wordpress_api_key' ) == FALSE ) { ?>
-<div style="padding: 5px; border: 1px solid #e5e5e5;-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);box-shadow: 0 1px 1px rgba(0,0,0,.04);background:#faf4b1;margin-bottom: 20px">If you are recieving spam comments on your PSMU blog, please <a href="options-general.php?page=akismet-key-config"><b><u>activate Akismet</u></b></a> now. All you need is the <b>free plan</b> since there is no exchange of money on our blogs.</div>
-<?php } ?>
-
-<!--<div style="padding: 5px; border: 1px solid #e5e5e5;-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);box-shadow: 0 1px 1px rgba(0,0,0,.04);background:#45aab8;color:#fff;margin-bottom: 20px">Starting April 21st, <a style="color:#faf4b1" target="_blank" href="http://googlewebmastercentral.blogspot.com/2015/02/finding-more-mobile-friendly-search.html"><b><u>Google announced</u></b></a> they'll start ranking your site based on if it's mobile friendly or not. Please <a style="color:#faf4b1" href="admin.php?page=wptouch-admin-touchboard"><b><u>activate WPtouch Pro</u></b></a> now to make your site mobile friendly.</div>-->
-
-<!--<div style="padding: 5px; border: 1px solid #e5e5e5;-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);box-shadow: 0 1px 1px rgba(0,0,0,.04);background:#ff4486;color:#fff;margin-bottom: 20px">Maintenance: On ____ at 12am until 1am Pacific we will be under scheduled maintenance. No downtime is expected.</div>-->
-
 <div class="row">
 
 <div class="one_five">
@@ -310,14 +302,14 @@ function drawChart() {
     <table>
       <tr>
         <td class="td_width">PageSpeed:</td>
-        <td>On <a class="button thickbox" id="td_thick" style="float:right" href="http://psmutheme.com/docs/pagespeed?TB_iframe=true">info</a></td>
+        <td>N/A <a class="button thickbox" id="td_thick" style="float:right" href="http://psmutheme.com/docs/pagespeed?TB_iframe=true">info</a></td>
       </tr>
     </table>
     <div class="line_break"></div>
     <table>
       <tr>
         <td class="td_width">SuperCache:</td>
-        <td>On <a class="button thickbox" id="td_thick" style="float:right" href="http://psmutheme.com/docs/supercache?TB_iframe=true">info</a></td>
+        <td>N/A <a class="button thickbox" id="td_thick" style="float:right" href="http://psmutheme.com/docs/supercache?TB_iframe=true">info</a></td>
       </tr>
     </table>
     </div>
@@ -328,7 +320,7 @@ function drawChart() {
     <table>
       <tr>
         <td class="td_width">Server OS:</td>
-        <td>RedHat <?php echo PHP_OS ?></td>
+        <td><?php echo PHP_OS ?></td>
       </tr>
     </table>
     <div class="line_break"></div>	 
@@ -336,6 +328,20 @@ function drawChart() {
       <tr>
         <td class="td_width">PHP Ngine:</td>
         <td><?php echo phpversion() ?></td>
+      </tr>
+    </table>
+    <div class="line_break"></div>
+    <table>
+      <tr>
+        <td class="td_width">RAM Usage:</td>
+        <td><?php echo convert(memory_get_usage(true)); ?> MB</td>
+      </tr>
+    </table>
+    <div class="line_break"></div>
+    <table>
+      <tr>
+        <td class="td_width">RAM Avail:</td>
+        <td><?php echo convert(ini_get('memory_limit')); ?> MB</td>
       </tr>
     </table>
     <div class="line_break"></div>
@@ -350,20 +356,6 @@ function drawChart() {
       <tr>
         <td class="td_width">WordPress:</td>
         <td><?php echo $wp_version ?></td>
-      </tr>
-    </table>
-    <div class="line_break"></div>
-    <table>
-      <tr>
-        <td class="td_width">Processors:</td>
-        <td>24 Intel Xeon's</td>
-      </tr>
-    </table>
-    <div class="line_break"></div>
-    <table>
-      <tr>
-        <td class="td_width">Total RAM:</td>
-        <td>128 GB</td>
       </tr>
     </table>
     </div>
