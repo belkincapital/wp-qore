@@ -3,7 +3,7 @@
    Plugin Name: WP Qore
    Plugin URI: http://wpqore.com/
    Description: For WordPress Standalone and Multisite.
-   Version: 2.4
+   Version: 2.5
    Author: Jason Jersey
    Author URI: http://twitter.com/degersey
    License: GNU GPL 3.0
@@ -103,41 +103,20 @@ function check_HTTP_request( $commentdata ) {
     
     return $commentdata;
 }
-/** add_action('check_comment_flood', 'check_HTTP_request'); **/
 add_action('preprocess_comment', 'check_HTTP_request');
 add_action('pre_comment_on_post', 'check_HTTP_request');
 
 /** Add stuff to your feed content **/
 function q_addtorssposts($content) {
 if(is_feed()){
-$content .= '<br><br>(Feed powered by <a target="" href="http://psmutheme.com/?ref=feed">PSMU</a>)<br><br>';
+$content .= '<br><br>(Powered by <a target="_blank" href="http://psmutheme.com/?ref=feed">PSMU</a>)<br><br>';
 }
 return $content;
 }
 add_filter('the_excerpt_rss', 'q_addtorssposts');
 add_filter('the_content', 'q_addtorssposts');
-				 
-/* Creates random keys for confirm checkbox */
-function generate_confirm_key($length = 50) {
-    $characters = '-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, strlen($characters) - 1)];
-    }
-        return $randomString;
-}
-
-/* Add login confirm checkbox */
-function insert_login_checkbox() { 
-        echo '<p class="forgetmenot"><label for="confirm-' . generate_confirm_key() . '"><input type="checkbox" name="confirm-' . generate_confirm_key() . '" id="confirm-' . generate_confirm_key() . '" value="true" required><label for="confirm-' . generate_confirm_key() . '"> <span style="color:#CC0000">Confirm</span></label></p><br /><br />';    
-}
-
-/* Add login confirm action */
-add_action( 'login_form', 'insert_login_checkbox' );
-
-/* Hide default welcome dashboard and create new one
- * load-index.php ?
- */
+				
+/* Hide default welcome dashboard and create new one */
 function rc_my_welcome_panel() { 
     include('welcome_widget.php');
 }
@@ -148,9 +127,7 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
 /* Add new Welcome Panel */
 add_action( 'welcome_panel', 'rc_my_welcome_panel' );
 
-/**
- * Always show the welcome panel on subdomains
- */
+/* Always show the welcome panel on subdomains */
 if ( is_multisite() )
 add_action( 'load-index.php', 'show_welcome_panel_on_multisite' );
 
@@ -160,22 +137,3 @@ function show_welcome_panel_on_multisite() {
 	if ( 0 == get_user_meta( $user_id, 'show_welcome_panel', true ) )
 		update_user_meta( $user_id, 'show_welcome_panel', 1 );
 }
-
-/**
- * Add Login Confirm
- */
-function psmu_login_confirm_notice() { ?>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script>
-jQuery(document).ready( function($) {
-
-    $('#loginform p.submit input').click(function() {
-        return confirm('You are about to login. Do you wish to continue?');
-    });
-	  
-});
-</script>
-<?php
-
-}
-add_action('login_head', 'psmu_login_confirm_notice');
