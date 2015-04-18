@@ -3,7 +3,7 @@
    Plugin Name: WP Qore
    Plugin URI: http://wpqore.com/
    Description: For WordPress Standalone and Multisite.
-   Version: 2.5
+   Version: 2.6
    Author: Jason Jersey
    Author URI: http://twitter.com/degersey
    License: GNU GPL 3.0
@@ -50,14 +50,13 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 
 /** Customize left wp-admin footer text **/
 function custom_admin_footer2() {
-    $the_year = date('Y');
-    echo "&copy;$the_year PSMU, all rights reserved.";
+    echo "";
 } 
 add_filter('admin_footer_text', 'custom_admin_footer2');
 
 /** Remove wp version from admin footer **/
 function replace_footer_version2() {
-    echo "Managed WordPress Hosting Platform.";
+    echo "";
 }
 add_filter( 'update_footer', 'replace_footer_version2', '1234');
 
@@ -109,7 +108,7 @@ add_action('pre_comment_on_post', 'check_HTTP_request');
 /** Add stuff to your feed content **/
 function q_addtorssposts($content) {
 if(is_feed()){
-$content .= '<br><br>(Powered by <a target="_blank" href="http://psmutheme.com/?ref=feed">PSMU</a>)<br><br>';
+$content .= '<br><br>(Powered by <a target="_blank" href="http://www.muchsocial.com/?ref=feed">MuchSocial</a>)<br><br>';
 }
 return $content;
 }
@@ -128,12 +127,16 @@ remove_action( 'welcome_panel', 'wp_welcome_panel' );
 add_action( 'welcome_panel', 'rc_my_welcome_panel' );
 
 /* Always show the welcome panel on subdomains */
-if ( is_multisite() )
-add_action( 'load-index.php', 'show_welcome_panel_on_multisite' );
+if ( is_multisite() ) {
+    add_action( 'load-index.php', 'show_welcome_panel_on_multisite' );
+} else {
+    add_action( 'load-index.php', 'show_welcome_panel_on_multisite' );
+}
 
 function show_welcome_panel_on_multisite() {
 	$user_id = get_current_user_id();
 
-	if ( 0 == get_user_meta( $user_id, 'show_welcome_panel', true ) )
+	if ( 0 == get_user_meta( $user_id, 'show_welcome_panel', true ) ) {
 		update_user_meta( $user_id, 'show_welcome_panel', 1 );
+        }
 }
