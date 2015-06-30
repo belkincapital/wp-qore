@@ -3,7 +3,7 @@
    Plugin Name: WP Qore
    Plugin URI: http://wpqore.com/
    Description: For WordPress Standalone and Multisite.
-   Version: 2.6
+   Version: 2.6.2
    Author: Jason Jersey
    Author URI: http://twitter.com/degersey
    License: GNU GPL 3.0
@@ -74,9 +74,6 @@ function enqueue_jsapi(){
 }
 add_action('admin_enqueue_scripts', 'enqueue_jsapi');
 
-/** Show post thumbnails in feeds **/
-function diw_post_thumbnail_feeds($content) {	global $post;	if(has_post_thumbnail($post->ID)) {		$content = '<div>' . get_the_post_thumbnail($post->ID) . '</div>' . $content;	}	return $content;}add_filter('the_excerpt_rss', 'diw_post_thumbnail_feeds');add_filter('the_content_feed', 'diw_post_thumbnail_feeds');
-
 /** Redirect To Post When Search Query Returns Single Result **/
 add_action('template_redirect', 'single_result');
 function single_result() {
@@ -88,32 +85,12 @@ function single_result() {
 	}
 }
 
-/** Check for HTTP-Refferer and UserAgent, to prevent spammers **/
-function check_HTTP_request( $commentdata ) {
-    if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] == "") {
-        wp_die( __('<b>Please enable referrers in your browser!</b><br><br><small>MSG ID: Refer = none</small>') );
-    }
-    if (!isset($_SERVER['HTTP_USER_AGENT']) || $_SERVER['HTTP_USER_AGENT'] == "") {
-        wp_die( __('<b>Please enable your user agent in your browser!</b><br><br><small>MSG ID: UserAgent = none</small>') );
-    }
- 
-    /** Always remove the URL from the comment author's comment **/
+/** Always remove the URL from the comment author's comment **/
+function check_HTTP_request($commentdata) {
     unset( $commentdata['comment_author_url'] );
-    
     return $commentdata;
 }
-add_action('preprocess_comment', 'check_HTTP_request');
-add_action('pre_comment_on_post', 'check_HTTP_request');
-
-/** Add stuff to your feed content **/
-function q_addtorssposts($content) {
-if(is_feed()){
-$content .= '<br><br>(Powered by <a target="_blank" href="http://www.muchsocial.com/?ref=feed">MuchSocial</a>)<br><br>';
-}
-return $content;
-}
-add_filter('the_excerpt_rss', 'q_addtorssposts');
-add_filter('the_content', 'q_addtorssposts');
+add_filter('preprocess_comment', 'check_HTTP_request');
 				
 /* Hide default welcome dashboard and create new one */
 function rc_my_welcome_panel() { 
